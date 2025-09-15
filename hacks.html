@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Liens</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: #0a0a0a;
+      color: #e5e5e5;
+      font-family: 'Segoe UI', sans-serif;
+      scroll-behavior: smooth;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Supprimer scrollbar native */
+    ::-webkit-scrollbar {
+      width: 0px;
+      background: transparent;
+    }
+
+    /* Cartes glass + glow bleu */
+    .glow-card {
+      background: rgba(20, 20, 20, 0.65);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(0, 150, 255, 0.2);
+      border-radius: 1rem;
+      box-shadow: 0 0 25px rgba(0, 150, 255, 0.12);
+      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    .glow-card.show {
+      opacity: 1;
+      transform: translateY(0);
+      transition: all 0.6s ease;
+    }
+    .glow-card:hover {
+      box-shadow: 0 0 35px rgba(0, 150, 255, 0.5), 0 0 60px rgba(0, 200, 255, 0.3);
+      transform: translateY(-6px) scale(1.02);
+    }
+
+    /* Boutons bleu dégradé */
+    .glow-btn {
+      background: linear-gradient(135deg, #00c6ff, #0072ff);
+      background-size: 200% 200%;
+      color: white;
+      border: none;
+      border-radius: 0.75rem;
+      padding: 0.5rem 1rem;
+      box-shadow: 0 0 15px rgba(0, 150, 255, 0.4);
+      transition: all 0.3s ease;
+    }
+    .glow-btn:hover {
+      box-shadow: 0 0 30px rgba(0, 200, 255, 0.9), 0 0 50px rgba(0, 120, 255, 0.7);
+      transform: scale(1.08);
+    }
+
+    /* Titres sections */
+    h2.section-title {
+      font-size: 2rem;
+      margin-bottom: 30px;
+      text-align: center;
+      background: linear-gradient(90deg, #00c6ff, #0072ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 20px rgba(0, 150, 255, 0.2);
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      top: 50%;
+      left: 20px;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      z-index: 1000;
+    }
+    .sidebar a {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      transition: all 0.3s;
+    }
+    .sidebar a.active,
+    .sidebar a:hover {
+      background: linear-gradient(135deg, #00c6ff, #0072ff);
+      box-shadow: 0 0 10px rgba(0,150,255,0.8);
+      transform: scale(1.3);
+    }
+
+    /* Scroll progress bar */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      right: 10px;
+      width: 6px;
+      height: 100%;
+      background: rgba(255,255,255,0.05);
+      border-radius: 4px;
+      overflow: hidden;
+      z-index: 1000;
+    }
+    .scroll-progress-bar {
+      width: 100%;
+      height: 0;
+      background: linear-gradient(180deg, #00c6ff, #0072ff);
+      border-radius: 4px;
+      box-shadow: 0 0 15px rgba(0,150,255,0.6);
+      transition: height 0.1s ease-out;
+    }
+
+    section {
+      padding: 80px 20px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Scroll Progress -->
+  <div class="scroll-progress">
+    <div class="scroll-progress-bar" id="scrollBar"></div>
+  </div>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <a href="#tab1" id="link1"></a>
+    <a href="#tab2" id="link2"></a>
+    <a href="#tab3" id="link3"></a>
+  </div>
+
+  <div class="max-w-5xl mx-auto">
+
+    <!-- Version Box -->
+    <div id="versionBox" class="my-8 p-6 rounded-2xl glow-card flex justify-between items-center">
+      <span class="font-semibold text-lg">Roblox Version</span>
+      <span id="windowsVersion" class="font-mono text-blue-400">Loading...</span>
+    </div>
+
+    <script>
+      fetch('https://weao.xyz/api/versions/current')
+        .then(response => response.json())
+        .then(data => {
+          const windowsVersion = data.Windows || 'Unknown';
+          document.getElementById('windowsVersion').textContent = windowsVersion;
+        })
+        .catch(err => {
+          console.error('Erreur en récupérant la version:', err);
+          document.getElementById('windowsVersion').textContent = 'Error';
+        });
+    </script>
+
+    <!-- TAB 1 -->
+    <section id="tab1">
+      <h2 class="section-title">Tab 1</h2>
+      <div class="grid gap-6">
+        <div class="p-6 glow-card"><h3 class="text-xl font-semibold mb-4">Zenith | UNC 99%</h3><div class="flex gap-3 flex-wrap"><a href="https://zenith.win/" target="_blank" class="glow-btn">Site</a><a href="https://discord.gg/Gb3Prb8B3n" target="_blank" class="glow-btn">Discord</a></div></div>
+        <div class="p-6 glow-card"><h3 class="text-xl font-semibold mb-4">Wave | UNC 99%</h3><div class="flex gap-3 flex-wrap"><a href="https://getwave.gg/" target="_blank" class="glow-btn">Site</a><a href="https://discord.com/invite/rARhPpN7fY" target="_blank" class="glow-btn">Discord</a></div></div>
+        <div class="p-6 glow-card"><h3 class="text-xl font-semibold mb-4">Volcano | UNC 99%</h3><div class="flex gap-3 flex-wrap"><a href="https://volcano.wtf/" target="_blank" class="glow-btn">Site</a><a href="https://volcano.wtf/discord.html" target="_blank" class="glow-btn">Discord</a></div></div>
+        <div class="p-6 glow-card"><h3 class="text-xl font-semibold mb-4">Velocity | UNC 99%</h3><div class="flex gap-3 flex-wrap"><a href="https://getvelocity.lol/" target="_blank" class="glow-btn">Site</a><a href="https://discord.com/invite/velocityide" target="_blank" class="glow-btn">Discord</a></div></div>
+        <div class="p-6 glow-card"><h3 class="text-xl font-semibold mb-4">Swift | UNC 99%</h3><div class="flex gap-3 flex-wrap"><a href="https://getswift.vip/" target="_blank" class="glow-btn">Site</a><a href="https://discord.com/invite/getswiftgg" target="_blank" class="glow-btn">Discord</a></div></div>
+        <div class="p-6 glow-card"><h3 class="text-xl font-semibold mb-4">Seliware | UNC 99%</h3><div class="flex gap-3 flex-wrap"><a href="https://seliware.com/" target="_blank" class="glow-btn">Site</a><a href="https://discord.com/invite/nzEggEE9vx" target="_blank" class="glow-btn">Discord</a></div></div>
+        <div class="p-6 glow-card"><h3 class="text-xl font-semibold mb-4">Potassium | UNC 99%</h3><div class="flex gap-3 flex-wrap"><a href="https://potassium.pro/" target="_blank" class="glow-btn">Site</a><a href="https://discord.com/invite/potassium" target="_blank" class="glow-btn">Discord</a></div></div>
+        <div class="p-6 glow-card"><h3 class="text-xl font-semibold mb-4">Solara | UNC 66%</h3><div class="flex gap-3 flex-wrap"><a href="https://getsolara.dev/" target="_blank" class="glow-btn">Site</a><a href="https://getsolara.dev/revolt" target="_blank" class="glow-btn">Discord</a></div></div>
+        <div class="p-6 glow-card"><h3 class="text-xl font-semibold mb-4">Xeno | UNC 82%</h3><div class="flex gap-3 flex-wrap"><a href="https://www.xeno.onl/" target="_blank" class="glow-btn">Site</a><a href="https://discord.gg/xe-no" target="_blank" class="glow-btn">Discord</a></div></div>
+      </div>
+    </section>
+
+    <!-- TAB 2 -->
+    <section id="tab2">
+      <h2 class="section-title">Tab 2</h2>
+      <div class="grid gap-6">
+        <div class="p-6 glow-card"><h3 class="text-xl font-semibold mb-4">Delta | UNC 99%</h3><div class="flex gap-3 flex-wrap"><a href="https://deltaexploits.gg/" target="_blank" class="glow-btn">Site</a><a href="https://discord.gg/deltax" target="_blank" class="glow-btn">Discord</a></div></div>
+        <div class="p-6 glow-card"><h3 class="text-xl font-semibold mb-4">KRNL | UNC 95%</h3><div class="flex gap-3 flex-wrap"><a href="https://krnl.cat/" target="_blank" class="glow-btn">Site</a><a href="https://discord.gg/quSW94vB7q" target="_blank" class="glow-btn">Discord</a></div></div>
+        <div class="p-6 glow-card"><h3 class="text-xl font-semibold mb-4">Codex | UNC 98%</h3><div class="flex gap-3 flex-wrap"><a href="https://codex.lol/" target="_blank" class="glow-btn">Site</a><a href="https://discord.gg/codexlol" target="_blank" class="glow-btn">Discord</a></div></div>
+      </div>
+    </section>
+
+    <!-- TAB 3 -->
+    <section id="tab3">
+      <h2 class="section-title">Tab 3</h2>
+      <div class="grid gap-6">
+        <div class="p-6 glow-card"><h3 class="text-xl font-semibold mb-4">Matrix Hub</h3><div class="flex gap-3 flex-wrap"><a href="https://matrixhubs.shop/" target="_blank" class="glow-btn">Site</a><a href="https://matrixhub.xyz/discord.html" target="_blank" class="glow-btn">Discord</a></div></div>
+        <div class="p-6 glow-card"><h3 class="text-xl font-semibold mb-4">Matcha</h3><div class="flex gap-3 flex-wrap"><a href="#" class="px-4 py-2 rounded-xl bg-gray-600 cursor-not-allowed">Site (???)</a><a href="https://discord.com/invite/matchalol4" target="_blank" class="glow-btn">Discord</a></div></div>
+        <div class="p-6 glow-card"><h3 class="text-xl font-semibold mb-4">Photon</h3><div class="flex gap-3 flex-wrap"><a href="https://photonsys.sellpass.io/" target="_blank" class="glow-btn">Site</a><a href="https://discord.com/invite/vro" target="_blank" class="glow-btn">Discord</a></div></div>
+        <div class="p-6 glow-card"><h3 class="text-xl font-semibold mb-4">Vector</h3><div class="flex gap-3 flex-wrap"><a href="https://projectvector.cc/" target="_blank" class="glow-btn">Site</a><a href="https://discord.com/invite/fMhj4B9NyF" target="_blank" class="glow-btn">Discord</a></div></div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // Animation cartes au scroll
+    const cards = document.querySelectorAll('.glow-card');
+    function showOnScroll() {
+      const trigger = window.innerHeight * 0.85;
+      cards.forEach(card => {
+        const rect = card.getBoundingClientRect();
+        if (rect.top < trigger) {
+          card.classList.add('show');
+        }
+      });
+    }
+    window.addEventListener('scroll', showOnScroll);
+    window.addEventListener('load', showOnScroll);
+
+    // Activer le point actif sidebar
+    const sections = document.querySelectorAll("section");
+    const links = document.querySelectorAll(".sidebar a");
+    function activateSidebar() {
+      let index = sections.length;
+      while(--index && window.scrollY + 100 < sections[index].offsetTop) {}
+      links.forEach(link => link.classList.remove("active"));
+      links[index].classList.add("active");
+    }
+    window.addEventListener("scroll", activateSidebar);
+    activateSidebar();
+
+    // Scroll progress
+    const scrollBar = document.getElementById("scrollBar");
+    window.addEventListener("scroll", () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.body.scrollHeight - window.innerHeight;
+      const scrolled = (scrollTop / docHeight) * 100;
+      scrollBar.style.height = scrolled + "%";
+    });
+  </script>
+</body>
+</html>
